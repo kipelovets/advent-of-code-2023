@@ -22,7 +22,7 @@ let calibrationValue (lines : string array) =
         |> List.map convertLine
         |> List.sum
 
-printfn "Day1 sample: %d" (calibrationValue (sampleInput.Split '\n'))
+printfn "Day1.1 sample: %d" (calibrationValue (sampleInput.Split '\n'))
 
 let realInputLines = 
     "day1.input" 
@@ -31,7 +31,7 @@ let realInputLines =
         |> Array.map (fun e -> e.Trim())
         |> Array.filter (fun e -> e.Length > 0)
 
-printfn "Day1: %d" ( realInputLines |> calibrationValue )
+printfn "Day1.1: %d" ( realInputLines |> calibrationValue )
 
 let sampleInput2 = 
     "two1nine
@@ -66,10 +66,10 @@ let rec replaceDigits (str: string) : string =
             let replacement = string digit[0] + string (Array.IndexOf(List.toArray(digits), digit)) + digit[1..]
             res.Replace(digit, replacement)
 
-printfn "Day2 sample: %d" (sampleInput2.Split '\n' 
+printfn "Day1.2 sample: %d" (sampleInput2.Split '\n' 
             |> Array.map (fun e -> e.Trim())
             |> Array.map replaceDigits
             |> calibrationValue)
 
 let inputWithReplacedDigits = realInputLines |> Array.map replaceDigits
-printfn "Day2: %d" (inputWithReplacedDigits |> calibrationValue)
+printfn "Day1.2: %d" (inputWithReplacedDigits |> calibrationValue)
