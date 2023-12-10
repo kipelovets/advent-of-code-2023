@@ -23,9 +23,12 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"
         |> Array.map parseInputLine
 
 
-    let cardValue (card: Card): int =
+    let cardWinningNumbers (card: Card): int =
         let (winner, owned) = card
-        let wonNumbers = (Set.intersect (winner |> Set.ofArray) (owned |> Set.ofArray)).Count
+        (Set.intersect (winner |> Set.ofArray) (owned |> Set.ofArray)).Count
+
+    let cardValue (card: Card): int =
+        let wonNumbers = cardWinningNumbers card
         if wonNumbers > 0 then
             pown 2 (wonNumbers - 1)
         else
@@ -34,3 +37,21 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"
     let cardPileValue (cards: Card array): int =
         cards |> Array.map cardValue |> Array.fold (+) 0
 
+
+    type CardRecord = int * int
+    let totalWonCards (cards: Card list): int =
+        let cardRecords = cards 
+                          |> List.map (cardWinningNumbers >> fun x -> (x, 1))
+
+        let rec calc (records: CardRecord list): int list =
+            match records with
+            | first::rest -> 
+                let (wins, cnt) = first
+                let restWithWins = (rest[..wins-1] 
+                                        |> List.map (fun (w, c) -> (w, c + cnt))) @
+                                   (rest[wins..])
+
+                cnt::(calc restWithWins)
+            | [] -> []
+        
+        calc cardRecords |> List.fold (+) 0

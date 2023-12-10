@@ -41,3 +41,10 @@ type Day4Test () =
     [<Test>]
     member _.cardPileValueReal() =
         Day4.cardPileValue realInput |> should equal 15268
+
+    [<Test>]
+    member _.totalWonCards() =
+        Day4.totalWonCards (Day4.sampleInput |> Array.toList) |> should equal 30
+        Day4.totalWonCards (realInput |> Array.toList) |> should equal 6283755
+
+    
