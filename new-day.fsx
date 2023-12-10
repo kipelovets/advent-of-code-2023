@@ -16,7 +16,7 @@ let inputFile = $"day{num}.input"
 
 
 File.WriteAllText ($"{codeProj}/{codeFile}", "")
-File.WriteAllText ($"{codeProj}/{inputFile}", "")
+File.WriteAllText ($"{testProj}/{inputFile}", "")
 File.WriteAllText ($"{testProj}/{testFile}", "")
 
 let addProjectRef (projFileName:string) (fileName:string) (inputFile:string) =

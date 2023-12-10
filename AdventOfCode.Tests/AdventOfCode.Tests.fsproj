@@ -1,19 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Day3Test.fs" />
     <Compile Include="Day4Test.fs" />
+    <Compile Include="Day5Test.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="FsUnit" Version="5.6.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
@@ -22,18 +19,18 @@
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\AdventOfCode\AdventOfCode.fsproj" />
   </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="day3.input">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>  
-      <Content Include="day4.input">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>  
-    </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="day3.input">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="day4.input">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="day5.input">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
