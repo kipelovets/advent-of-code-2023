@@ -54,12 +54,20 @@ humidity-to-location map:
     [<Test>]
     member _.parseInput() =
         let almanac = Day5.parseInput sampleInput
-        let expected: int64 list = [79; 14; 55; 13]
-        almanac.seeds |> should equal expected
+        let expectedSeeds: int64 list = [79; 14; 55; 13]
+        almanac.seeds |> should equal expectedSeeds
         almanac.maps.Length |> should equal 7
-        almanac.maps[0] 79 |> should equal 81
+        almanac.maps[0] [(79, 1)] |> should equal [(int64 81, int64 1)]
 
     [<Test>]
     member _.processAlmanac() =
         Day5.processAlmanac (Day5.parseInput sampleInput) |> should equal 35
         Day5.processAlmanac (Day5.parseInput realInput) |> should equal 650599855
+
+    [<Test>]
+    member _.processAlmanacPart2() = 
+        let sampleAlmanac = (Day5.parseInput sampleInput)
+        let testAlmanac: Day5.Almanac = {seeds=[int64 82; int64 1]; maps=sampleAlmanac.maps}
+        Day5.processAlmanacRanges testAlmanac |> should equal 46
+        Day5.processAlmanacRanges sampleAlmanac |> should equal 46
+        Day5.processAlmanacRanges (Day5.parseInput realInput) |> should equal 1240035
