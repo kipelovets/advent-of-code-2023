@@ -6,9 +6,7 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Day3Test.fs" />
-    <Compile Include="Day4Test.fs" />
-    <Compile Include="Day5Test.fs" />
+    <Compile Include="*Test.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
@@ -23,13 +21,7 @@
     <ProjectReference Include="..\AdventOfCode\AdventOfCode.fsproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="day3.input">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="day4.input">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="day5.input">
+    <Content Include="*.input">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
