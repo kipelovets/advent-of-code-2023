@@ -46,3 +46,8 @@ let sortHands() =
 let part1() =
     Day7.part1 (Day7.parseInput sampleInput) |> should equal 6440
     Day7.part1 (Day7.parseInput realInput) |> should equal 253638586
+
+[<Test>]
+let part2() =
+    Day7.part2 (Day7.parseInput sampleInput) |> should equal 5905
+    Day7.part2 (Day7.parseInput realInput) |> should equal 253253225
