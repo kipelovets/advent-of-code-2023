@@ -6,11 +6,10 @@ if args.Length = 1 then
     exit 1
 let num = int args[1]
 
-let codeTemplate = $"namespace AdventOfCode
+let codeTemplate = $"module AdventOfCode.Day{num}
 
-module Day{num} =
-    let parseInput input = 
-        0
+let parseInput input = 
+    0
 "
 
 let testTemplate = $"""module AdventOfCode.TestsDay{num}
@@ -20,16 +19,14 @@ open AdventOfCode
 open System.IO
 open FsUnit
 
-[<TestFixture>]
-type Day{num}Test () =
-    let sampleInput = ""
+let sampleInput = ""
 
-    let realInput = "day{num}.input" |> File.ReadAllText 
+let realInput = "day{num}.input" |> File.ReadAllText 
 
-    [<Test>]
-    member _.parseInput() =
-        let result = Day{num}.parseInput sampleInput
-        result |> should equal 0
+[<Test>]
+let parseInput() =
+    let result = Day{num}.parseInput sampleInput
+    result |> should equal 0
 
 """
 
