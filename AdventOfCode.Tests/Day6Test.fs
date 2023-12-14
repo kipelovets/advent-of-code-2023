@@ -8,9 +8,9 @@ open FsUnit
 [<TestFixture>]
 type Day6Test () =
     let sampleInput = "Time:      7  15   30
-Distance:  9  40  200" |> Common.SplitInput |> Array.toList
+Distance:  9  40  200" |> Common.SplitInput
 
-    let realInput = "day6.input" |> File.ReadAllText |> Common.SplitInput |> Array.toList
+    let realInput = "day6.input" |> File.ReadAllText |> Common.SplitInput
 
     [<Test>]
     member _.parseInput() =

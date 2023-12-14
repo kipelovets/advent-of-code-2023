@@ -7,7 +7,7 @@ open System.IO
 [<TestFixture>]
 type Day3Test () =
 
-    let realInput = "day3.input" |> File.ReadAllText |> Common.SplitInput
+    let realInput = "day3.input" |> File.ReadAllText |> Common.SplitInput |> List.toArray
 
     [<Test>]
     member this.findPartNumbersRow() =

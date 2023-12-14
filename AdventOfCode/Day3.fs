@@ -15,7 +15,7 @@ module Day3 =
     ..592.....
     ......755.
     ...$.*....
-    .664.598.." |> Common.SplitInput
+    .664.598.." |> Common.SplitInput |> List.toArray
 
     let isSymbol (c: char): bool =
         @"!@#$%^&*()-=_+[]{};':"",\/<>?".Contains(c)
