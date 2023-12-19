@@ -37,13 +37,25 @@ let predictNext() =
     |> should equal 18
 
 [<Test>]
-let predictAll() =
+let predictAllNext() =
     sampleInput
     |> Day9.parseInput
-    |> Day9.predictNextAll
+    |> Day9.predictAll Day9.predictNext
     |> should equal 114
 
     realInput
     |> Day9.parseInput
-    |> Day9.predictNextAll
+    |> Day9.predictAll Day9.predictNext
     |> should equal 1641934234
+
+[<Test>]
+let predictAllPRev() =
+    sampleInput
+    |> Day9.parseInput
+    |> Day9.predictAll Day9.predictPrev
+    |> should equal 2
+
+    realInput
+    |> Day9.parseInput
+    |> Day9.predictAll Day9.predictPrev
+    |> should equal 975

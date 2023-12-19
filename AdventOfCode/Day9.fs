@@ -10,7 +10,7 @@ let differences (line: int seq): int seq =
 
 let nonzero a = a <> 0
 
-let predictNext (line: int seq): int =
+let calcAllDiffs (line: int seq): int seq seq =
     let rec calcDiffs (cur: int seq seq): int seq seq =
         let last = cur |> Seq.head
         if (last |> Seq.filter nonzero |> Seq.length) = 0 then
@@ -19,10 +19,18 @@ let predictNext (line: int seq): int =
             calcDiffs (Seq.append (seq {differences last}) cur)
     
     calcDiffs [line]
+
+let predictNext (line: int seq): int =
+    calcAllDiffs line
     |> Seq.map Seq.last 
     |> Seq.fold (+) 0
 
-let predictNextAll (lines: Input): int =
+let predictAll (predictor: int seq -> int) (lines: Input): int =
     lines
-    |> Seq.map predictNext 
+    |> Seq.map predictor
     |> Seq.fold (+) 0
+
+let predictPrev (line: int seq): int =
+    calcAllDiffs line
+    |> Seq.map Seq.head
+    |> Seq.fold (fun a b -> b - a) 0
