@@ -46,4 +46,4 @@ let predictAll() =
     realInput
     |> Day9.parseInput
     |> Day9.predictNextAll
-    |> should equal 0
+    |> should equal 1641934234
