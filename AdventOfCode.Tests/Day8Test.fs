@@ -21,6 +21,17 @@ AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)" |> Common.SplitInput
 
+let sampleInputPart2 = """LR
+
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)""" |> Common.SplitInput
+
 let realInput = "day8.input" |> File.ReadAllText |> Common.SplitInput
 
 [<Test>]
@@ -31,6 +42,11 @@ let parseInput() =
 
 [<Test>]
 let walk() = 
-    Day8.walk (Day8.parseInput sampleInput) |> should equal 2
-    Day8.walk (Day8.parseInput sampleInput2) |> should equal 6
-    Day8.walk (Day8.parseInput realInput) |> should equal 16531
+    Day8.walk (Day8.parseInput sampleInput) "AAA" |> should equal 2
+    Day8.walk (Day8.parseInput sampleInput2) "AAA" |> should equal 6
+    Day8.walk (Day8.parseInput realInput) "AAA" |> should equal 16531
+
+[<Test>]
+let walkAll() =
+    Day8.walkAll (Day8.parseInput sampleInputPart2) |> should equal 6
+    Day8.walkAll (Day8.parseInput realInput) |> should equal 24035773251517L
