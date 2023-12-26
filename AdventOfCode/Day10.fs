@@ -59,7 +59,7 @@ let move ((x, y): Coords) (dir: Direction): Coords =
     | West -> (x - 1, y)
     | East -> (x + 1, y)
 
-let connectedNodes (island: Landscape) (cur: Coords): Coords seq =
+let connectedNodes (island: Landscape) (cur: Coords): (Direction * Coords) seq =
     let len = island.Length
     let (x, y): Coords = cur
     let nextDirs = seq {
@@ -73,11 +73,11 @@ let connectedNodes (island: Landscape) (cur: Coords): Coords seq =
         |> Seq.map (fun dir -> (dir, move cur dir))
         |> Seq.filter (fun (dir, (x2, y2)) -> connects (island[y][x]) (island[y2][x2]) dir)
 
-    nextNodes |> Seq.map (fun (_, node) -> node)
+    nextNodes
 
 let rec findLoop (island: Landscape) (start: Coords) (path: Coords seq): int option =
     let cur = path |> Seq.last
-    let nextNodes = connectedNodes island cur
+    let nextNodes = connectedNodes island cur |> Seq.map (fun (_, c) -> c)
 
     let pathLen = path |> Seq.length
     if Seq.contains start nextNodes && pathLen > 2 then
@@ -92,6 +92,18 @@ let rec findLoop (island: Landscape) (start: Coords) (path: Coords seq): int opt
             Some(Seq.head loopLengths)
         else 
             None
+
+[<TailCall>]
+let rec findLoop2 (island: Landscape) (prev: Coords) (dir: Direction) (steps: int): int option =
+    let (x, y) = move prev dir
+    let backDir = opposite dir
+    
+    match island[y][x] with
+    | Start -> Some(steps + 1)
+    | Ground -> None
+    | Pipe(f, t) -> 
+        let nextDir = [f; t] |> Seq.filter ((<>) backDir) |> Seq.head
+        findLoop2 island (x, y) nextDir (steps + 1)
        
 let findStart (island: Landscape): Coords = 
     let len = island.Length
@@ -102,5 +114,12 @@ let findStart (island: Landscape): Coords =
 
 let solve (island: Landscape): int =
     let start: Coords = findStart island
+    let afterStart = connectedNodes island start |> Seq.map (fun (d, _) -> d)
 
-    findLoop island start (seq { start }) |> Option.get
+    let res = afterStart 
+            |> Seq.map (fun dir -> findLoop2 island start dir 0)
+            |> Seq.filter Option.isSome
+            |> Seq.map Option.get
+            |> Seq.head
+    
+    res / 2

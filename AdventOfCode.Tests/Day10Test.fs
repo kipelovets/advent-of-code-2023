@@ -42,11 +42,11 @@ let testConnects() =
 [<Test>]
 let testConnectedNodes() =
     let island = parseInput sampleInput1
-    connectedNodes island (0, 2) |> should equal [(1, 2); (0, 3)]
-    connectedNodes island (1, 2) |> should equal [(0, 2); (1, 1)]
+    connectedNodes island (0, 2) |> Seq.map snd |> should equal [(1, 2); (0, 3)]
+    connectedNodes island (1, 2) |> Seq.map snd |> should equal [(0, 2); (1, 1)]
 
 [<Test>]
 let testSolve() =
     sampleInput1 |> parseInput |> solve |> should equal 8
     sampleInput2 |> parseInput |> solve |> should equal 4
-    realInput |> parseInput |> solve |> should equal 4
+    realInput |> parseInput |> solve |> should equal 6842
